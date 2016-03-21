@@ -1,0 +1,24 @@
+<!--# Written by Kevin Jesse for Coursera.org-->
+
+<h1>
+  <%= form_tag(recipes_index_path, method: "get") do %>
+      <%= label_tag(:search, "Search for:") %>
+      <%= text_field_tag(:search) %>
+      <%= submit_tag("Search") %>
+  <% end %>
+</h1>
+<h4>Currently showing for  <%= @search_term %></h4>
+<table border="1">
+  <tr>
+    <th>Thumbnail</th>
+    <th>Title</th>
+    <th>Social Rank</th>
+  </tr>
+  <% @recipes.each do |recipe| %>
+      <tr class=<%= cycle('even', 'odd') %>>
+        <td><a href=<%=recipe["source_url"]%>><%=image_tag(recipe["image_url"], size: "100")%></a></td>
+        <td><div align="center"><a href=<%=recipe["source_url"]%>><%= raw recipe["title"] %></a></div></td>
+        <td><div align="center"><%=recipe["social_rank"]%></div></td>
+      </tr>
+  <% end %>
+</table>
